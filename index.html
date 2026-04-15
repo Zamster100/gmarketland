@@ -880,6 +880,110 @@
     }
 
     .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ══════════════════════════════════
+       THEME TOGGLE
+    ══════════════════════════════════ */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover { border-color: var(--purple); color: var(--text); }
+    .theme-toggle svg  { width: 16px; height: 16px; transition: transform .3s; }
+    .theme-toggle:hover svg { transform: rotate(20deg); }
+
+    /* ══════════════════════════════════
+       LIGHT MODE
+    ══════════════════════════════════ */
+    body.light {
+      --bg:      #f2f2fa;
+      --bg2:     #e9e9f5;
+      --bg3:     #dcdcef;
+      --border:  rgba(137,84,242,.2);
+      --text:    #0d0d1f;
+      --muted:   #5c5c82;
+      --card-bg: #eaeaf6;
+    }
+
+    body.light nav          { background: rgba(242,242,250,.95); }
+    body.light .modal       { background: var(--bg); }
+    body.light .wallet-btn  { color: var(--text); }
+    body.light .card-lock-overlay { background: rgba(235,235,248,.88); }
+    body.light .lock-label  { color: var(--text); }
+    body.light .cta-form input { background: rgba(255,255,255,.6); }
+    body.light .toast       { box-shadow: 0 8px 32px rgba(100,80,200,.15); }
+    body.light .spinner-ring { border-color: var(--bg3); border-top-color: var(--purple); border-right-color: var(--mint); }
+    body.light .glow-1      { background: rgba(137,84,242,.04); }
+    body.light .glow-2      { background: rgba(0,0,146,.04); }
+    body.light .glow-3      { background: rgba(46,225,177,.03); }
+
+    /* icon fill in light mode for theme toggle moon→sun */
+    body.light .icon-moon   { display: none; }
+    body:not(.light) .icon-sun { display: none; }
+
+    /* ══════════════════════════════════
+       MOBILE
+    ══════════════════════════════════ */
+
+    /* hide "Deck" label text on small screens, keep icon */
+    @media (max-width: 740px) {
+      .deck-btn-label { display: none; }
+      .deck-btn { padding: 0 10px; gap: 0; }
+    }
+
+    /* collapse Sign In on narrow screens */
+    @media (max-width: 560px) {
+      .btn-ghost { display: none; }
+      .nav-divider { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 14px; gap: 8px; height: 56px; }
+      .btn { padding: 8px 14px; font-size: 13px; }
+      .nav-logo-name { font-size: 17px; }
+
+      .beta-ribbon { font-size: 11px; padding: 7px 12px; }
+      .beta-ribbon .ribbon-extra { display: none; }
+
+      .hero { padding: 48px 16px 40px; }
+      .hero p { font-size: 16px; }
+      .hero-form { flex-direction: column; }
+      .hero-form .btn-primary { width: 100%; justify-content: center; }
+
+      .stats-inner { display: grid; grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .stat-item:nth-child(even) { border-right: none; }
+      .stat-item:nth-child(3),
+      .stat-item:nth-child(4)    { border-bottom: none; }
+
+      .section { padding: 0 16px; margin-bottom: 48px; }
+      .section-badge { display: none; }
+
+      .cta-card { padding: 36px 20px; }
+      .cta-card h2 { font-size: 22px; }
+      .cta-form { flex-direction: column; }
+      .cta-form .btn-primary { width: 100%; }
+
+      footer { padding: 24px 16px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-copy { text-align: left; }
+
+      .modal { padding: 24px 18px; }
+      .modal-s2 { padding: 36px 16px; }
+      .modal-email-row { flex-direction: column; }
+      .modal-email-row .btn-primary { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -893,7 +997,7 @@
 <div class="beta-ribbon">
   <span>
     <span class="beta-dot"></span>
-    GoMarket is currently in <strong>Closed Beta</strong> — Limited testers only &nbsp;·&nbsp; Apply for early access below
+    GoMarket is currently in <strong>Closed Beta</strong><span class="ribbon-extra"> — Limited testers only &nbsp;·&nbsp; Apply for early access below</span>
   </span>
 </div>
 
@@ -937,8 +1041,22 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
       </svg>
-      Deck
+      <span class="deck-btn-label">Deck</span>
     </a>
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="themeToggle" title="Toggle light / dark mode" onclick="toggleTheme()">
+      <!-- Sun (shown in dark mode) -->
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <!-- Moon (shown in light mode) -->
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
     <!-- X / Twitter -->
     <a href="https://x.com/GoMarketApp" target="_blank" rel="noopener" class="social-btn" title="Follow us on X">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1498,6 +1616,18 @@
 
   // Close on ESC
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    document.body.classList.toggle('light');
+    localStorage.setItem('gm-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  }
+
+  // Restore saved preference on load
+  (function() {
+    const saved = localStorage.getItem('gm-theme');
+    if (saved === 'light') document.body.classList.add('light');
+  })();
 </script>
 
 </body>
