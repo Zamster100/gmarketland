@@ -1656,6 +1656,39 @@
   // Close on ESC
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  // ── STAT COUNT-UP ──
+  function countUp(el, target, prefix, suffix, duration) {
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const value = Math.floor(ease * target);
+      el.textContent = prefix + value.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = prefix + target.toLocaleString() + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      statsObserver.disconnect();
+      const items = [
+        { el: document.querySelectorAll('.stat-value')[0], target: 10,  prefix: '$', suffix: 'M' },
+        { el: document.querySelectorAll('.stat-value')[1], target: 64,  prefix: '',  suffix: ''  },
+        { el: document.querySelectorAll('.stat-value')[2], target: 412, prefix: '',  suffix: ''  },
+        { el: document.querySelectorAll('.stat-value')[3], target: 0,   prefix: '$', suffix: ''  },
+      ];
+      items.forEach((item, i) => {
+        setTimeout(() => countUp(item.el, item.target, item.prefix, item.suffix, 1400), i * 120);
+      });
+    });
+  }, { threshold: 0.5 });
+
+  const statsEl = document.querySelector('.stats-inner');
+  if (statsEl) statsObserver.observe(statsEl);
+
   // ── THEME TOGGLE ──
   function toggleTheme() {
     document.body.classList.toggle('light');
