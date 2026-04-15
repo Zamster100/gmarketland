@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoMarket — Prediction Markets · Closed Beta</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:  #8954F2;
+      --mint:    #2EE1B1;
+      --navy:    #000092;
+      --sky:     #49A7C3;
+      --bg:      #06060e;
+      --bg2:     #0d0d1a;
+      --bg3:     #13132a;
+      --border:  rgba(137,84,242,.18);
+      --text:    #ffffff;
+      --muted:   #7777a0;
+      --card-bg: #0f0f22;
+      --grad:    linear-gradient(135deg, var(--purple), var(--sky), var(--mint));
+      --grad2:   linear-gradient(90deg, var(--purple), var(--mint));
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    /* ── BETA RIBBON ── */
+    .beta-ribbon {
+      background: linear-gradient(90deg, var(--navy), var(--purple), var(--navy));
+      background-size: 300% 100%;
+      animation: ribbonShift 6s ease infinite;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .4px;
+      color: rgba(255,255,255,.9);
+    }
+
+    @keyframes ribbonShift {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .beta-ribbon span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .beta-dot {
+      width: 7px; height: 7px;
+      background: var(--mint);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(.7); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 28px;
+      height: 62px;
+      background: rgba(6,6,14,.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-name {
+      font-size: 19px;
+      font-weight: 800;
+      background: var(--grad2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -.3px;
+    }
+
+    .nav-spacer { flex: 1; }
+
+    /* social icons */
+    .nav-socials {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+
+    .social-btn:hover {
+      border-color: var(--purple);
+      color: var(--text);
+      background: rgba(137,84,242,.1);
+    }
+
+    .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .deck-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 13px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .deck-btn:hover {
+      border-color: var(--mint);
+      color: var(--mint);
+      background: rgba(46,225,177,.07);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--border);
+    }
+
+    .btn {
+      padding: 9px 20px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { border-color: var(--purple); color: var(--text); }
+
+    .btn-primary {
+      background: var(--grad2);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background .2s;
+    }
+
+    .btn-primary:hover::after { background: rgba(255,255,255,.08); }
+
+    /* ── GLOW ORBS ── */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(130px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-1 { width:700px; height:700px; background:rgba(137,84,242,.06); top:-200px; right:-150px; }
+    .glow-2 { width:500px; height:500px; background:rgba(0,0,146,.08); bottom:5%; left:-100px; }
+    .glow-3 { width:350px; height:350px; background:rgba(46,225,177,.04); top:45%; right:15%; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 88px 24px 72px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(137,84,242,.12);
+      border: 1px solid rgba(137,84,242,.3);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .grad-text {
+      background: var(--grad2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-form {
+      display: flex;
+      gap: 10px;
+      max-width: 460px;
+      margin: 0 auto 20px;
+    }
+
+    .hero-form input {
+      flex: 1;
+      padding: 14px 18px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .hero-form input::placeholder { color: var(--muted); }
+    .hero-form input:focus { border-color: var(--purple); }
+
+    .hero-form .btn-primary { padding: 14px 24px; font-size: 14px; border-radius: 12px; }
+
+    .hero-social-proof {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-social-proof strong { color: var(--mint); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      max-width: 900px;
+      margin: 0 auto 72px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-inner {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: 22px 16px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-value {
+      font-size: 22px;
+      font-weight: 800;
+      background: var(--grad2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    /* ── MARKETS PREVIEW ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto 72px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .section-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 900px)  { .market-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 560px)  { .market-grid { grid-template-columns: 1fr; } }
+
+    .market-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .market-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(137,84,242,0), rgba(137,84,242,.05));
+      opacity: 0;
+      transition: opacity .2s;
+      pointer-events: none;
+    }
+
+    .market-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(137,84,242,.4);
+    }
+
+    .market-card:hover::after { opacity: 1; }
+
+    /* lock overlay on hover */
+    .card-lock-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: rgba(6,6,14,.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity .2s;
+      pointer-events: none;
+      backdrop-filter: blur(2px);
+    }
+
+    .market-card:hover .card-lock-overlay { opacity: 1; }
+
+    .lock-icon {
+      width: 40px; height: 40px;
+      background: var(--grad2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lock-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
+
+    .lock-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .market-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .card-info { flex: 1; min-width: 0; }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-cat { font-size: 11px; color: var(--muted); }
+
+    .card-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+
+    .card-option { display: flex; align-items: center; gap: 10px; }
+
+    .opt-lbl { font-size: 12px; font-weight: 700; width: 26px; flex-shrink: 0; }
+    .opt-lbl-yes { color: var(--mint); }
+    .opt-lbl-no  { color: #e05555; }
+
+    .opt-bar-wrap { flex: 1; height: 6px; background: var(--bg3); border-radius: 10px; overflow: hidden; }
+    .opt-bar { height: 100%; border-radius: 10px; transition: width .7s ease; }
+    .opt-bar-yes { background: var(--grad2); }
+    .opt-bar-no  { background: linear-gradient(90deg,#e05555,#c03333); }
+
+    .opt-pct { font-size: 13px; font-weight: 800; width: 34px; text-align: right; flex-shrink: 0; }
+    .opt-pct-yes { color: var(--mint); }
+    .opt-pct-no  { color: #e05555; }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-vol { font-size: 12px; color: var(--muted); }
+    .card-vol span { color: var(--sky); font-weight: 600; }
+
+    .card-btns { display: flex; gap: 6px; }
+
+    .btn-yes {
+      padding: 6px 13px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      background: rgba(46,225,177,.1); color: var(--mint);
+      border: 1px solid rgba(46,225,177,.22); cursor: pointer; transition: all .15s;
+    }
+    .btn-yes:hover { background: rgba(46,225,177,.2); }
+
+    .btn-no {
+      padding: 6px 13px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      background: rgba(224,85,85,.1); color: #e05555;
+      border: 1px solid rgba(224,85,85,.2); cursor: pointer; transition: all .15s;
+    }
+    .btn-no:hover { background: rgba(224,85,85,.2); }
+
+    .card-badge {
+      position: absolute; top: 13px; right: 13px;
+      font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 6px;
+    }
+
+    .badge-hot  { background: rgba(137,84,242,.14); color: var(--purple); border: 1px solid rgba(137,84,242,.28); }
+    .badge-live { background: rgba(46,225,177,.1);  color: var(--mint);   border: 1px solid rgba(46,225,177,.22); }
+
+    /* ── HOW IT WORKS ── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 680px) { .how-grid { grid-template-columns: 1fr; } }
+
+    .how-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: border-color .2s;
+    }
+
+    .how-card:hover { border-color: rgba(137,84,242,.4); }
+
+    .how-number {
+      width: 44px; height: 44px;
+      background: var(--grad2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900;
+      color: #fff;
+      margin: 0 auto 16px;
+    }
+
+    .how-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+
+    .how-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── WAITLIST CTA ── */
+    .cta-section {
+      max-width: 680px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg,
+        rgba(137,84,242,.12) 0%,
+        rgba(0,0,146,.2) 50%,
+        rgba(46,225,177,.08) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 52px 40px;
+    }
+
+    .cta-card h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta-card p  { color: var(--muted); font-size: 15px; margin-bottom: 32px; line-height: 1.6; }
+
+    .cta-form {
+      display: flex;
+      gap: 10px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .cta-form input {
+      flex: 1;
+      padding: 13px 16px;
+      background: rgba(0,0,0,.3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .cta-form input:focus { border-color: var(--purple); }
+    .cta-form input::placeholder { color: var(--muted); }
+    .cta-form .btn-primary { padding: 13px 22px; border-radius: 12px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 32px 28px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .footer-links a { color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-socials { display: flex; align-items: center; gap: 8px; }
+
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ══════════════════════════════════
+       MODAL SYSTEM
+    ══════════════════════════════════ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--bg2);
+      border: 1px solid rgba(137,84,242,.3);
+      border-radius: 24px;
+      padding: 36px 32px;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+      transform: translateY(18px) scale(.97);
+      transition: transform .28s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .modal-backdrop.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      transition: all .15s;
+    }
+
+    .modal-close:hover { color: var(--text); border-color: var(--purple); }
+
+    /* STATE 1 — wallet select */
+    .modal-s1 .modal-logo {
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .modal-s1 h2 { text-align: center; font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+
+    .modal-s1 .modal-sub {
+      text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 28px;
+    }
+
+    .wallet-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .wallet-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all .2s;
+      width: 100%;
+      text-align: left;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .wallet-btn:hover {
+      border-color: rgba(137,84,242,.5);
+      background: rgba(137,84,242,.07);
+    }
+
+    .wallet-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .wallet-arrow {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .modal-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0;
+      color: var(--muted); font-size: 12px;
+    }
+
+    .modal-divider::before,
+    .modal-divider::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    .modal-email-row {
+      display: flex; gap: 8px;
+    }
+
+    .modal-email-row input {
+      flex: 1;
+      padding: 11px 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .modal-email-row input:focus { border-color: var(--purple); }
+    .modal-email-row input::placeholder { color: var(--muted); }
+    .modal-email-row .btn-primary { padding: 11px 18px; border-radius: 10px; font-size: 13px; }
+
+    /* STATE 2 — connecting */
+    .modal-s2 {
+      text-align: center;
+      padding: 48px 32px;
+    }
+
+    .spinner-ring {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 3px solid var(--bg3);
+      border-top-color: var(--purple);
+      border-right-color: var(--mint);
+      animation: spin .9s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .modal-s2 h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .modal-s2 p  { color: var(--muted); font-size: 14px; }
+
+    /* STATE 3 — denied */
+    .modal-s3 {
+      text-align: center;
+    }
+
+    .denied-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(224,85,85,.12);
+      border: 1px solid rgba(224,85,85,.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+
+    .modal-s3 h2 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+
+    .modal-s3 .denied-msg {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .denied-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(224,85,85,.1);
+      border: 1px solid rgba(224,85,85,.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e05555;
+      margin-bottom: 24px;
+    }
+
+    .modal-s3 .divider-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* success toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--bg2);
+      border: 1px solid rgba(46,225,177,.4);
+      border-radius: 12px;
+      padding: 14px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--mint);
+      box-shadow: 0 8px 40px rgba(0,0,0,.5);
+      z-index: 300;
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+      white-space: nowrap;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- glow orbs -->
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+<div class="glow-orb glow-3"></div>
+
+<!-- ── BETA RIBBON ── -->
+<div class="beta-ribbon">
+  <span>
+    <span class="beta-dot"></span>
+    GoMarket is currently in <strong>Closed Beta</strong> — Limited testers only &nbsp;·&nbsp; Apply for early access below
+  </span>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="34" height="34" viewBox="0 0 411 411" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M205.5 0C294.536 0 370.346 56.6233 398.887 135.824H356.974C330.589 78.5582 272.688 38.8069 205.5 38.8069C113.438 38.8069 38.8069 113.438 38.8069 205.5C38.8069 297.562 113.438 372.193 205.5 372.193C297.562 372.193 372.193 297.562 372.193 205.5C372.193 198.329 371.74 191.265 370.862 184.333H409.922C410.635 191.291 411 198.353 411 205.5C411 318.995 318.995 411 205.5 411C92.0055 411 0 318.995 0 205.5C0 92.0055 92.0055 0 205.5 0Z" fill="url(#n0)"/>
+      <path d="M386.305 226.667H328.094V184.333H386.305V226.667Z" fill="url(#n1)"/>
+      <path d="M144.644 206.382V337.725C128.786 330.415 114.469 320.337 102.309 308.11V164.047L144.644 206.382Z" fill="white"/>
+      <path d="M308.691 308.11C296.532 320.337 282.214 330.415 266.356 337.725V206.382L308.691 164.047V308.11Z" fill="white"/>
+      <path d="M295.745 91.3308C300.288 94.9265 304.611 98.7866 308.691 102.889V135.824L205.5 239.015L102.309 135.824V102.889C106.389 98.7867 110.712 94.9263 115.254 91.3308L205.5 180.805L295.745 91.3308Z" fill="white"/>
+      <defs>
+        <linearGradient id="n0" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+          <stop offset="0.08" stop-color="#9945FF"/>
+          <stop offset="0.3"  stop-color="#8752F3"/>
+          <stop offset="0.5"  stop-color="#5497D5"/>
+          <stop offset="0.6"  stop-color="#43B4CA"/>
+          <stop offset="0.72" stop-color="#28E0B9"/>
+          <stop offset="0.97" stop-color="#19FB9B"/>
+        </linearGradient>
+        <linearGradient id="n1" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+          <stop offset="0.08" stop-color="#9945FF"/>
+          <stop offset="0.3"  stop-color="#8752F3"/>
+          <stop offset="0.5"  stop-color="#5497D5"/>
+          <stop offset="0.6"  stop-color="#43B4CA"/>
+          <stop offset="0.72" stop-color="#28E0B9"/>
+          <stop offset="0.97" stop-color="#19FB9B"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="nav-logo-name">GoMarket</span>
+  </a>
+
+  <div class="nav-spacer"></div>
+
+  <!-- Social icons -->
+  <div class="nav-socials">
+    <!-- Deck -->
+    <a href="https://deck.gomarket.io/" target="_blank" rel="noopener" class="deck-btn" title="View our pitch deck">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+      Deck
+    </a>
+    <!-- X / Twitter -->
+    <a href="https://x.com/GoMarketApp" target="_blank" rel="noopener" class="social-btn" title="Follow us on X">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+    <!-- Instagram -->
+    <a href="https://instagram.com/GoMarketApp" target="_blank" rel="noopener" class="social-btn" title="Follow us on Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="nav-divider"></div>
+
+  <button class="btn btn-ghost" onclick="openModal()">Sign In</button>
+  <button class="btn btn-primary" onclick="openModal()">Request Access</button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="beta-dot"></span>
+    Closed Beta · Limited Access
+  </div>
+  <h1>Predict the future,<br><span class="grad-text">earn the edge.</span></h1>
+  <p>GoMarket is a decentralized prediction market where you trade on real-world outcomes — politics, crypto, sports, and beyond. Zero fees. On-chain settlement.</p>
+
+  <form class="hero-form" onsubmit="handleWaitlist(event, this)">
+    <input type="email" placeholder="Enter your email address" required />
+    <button type="submit" class="btn btn-primary">Get Early Access</button>
+  </form>
+
+  <div class="hero-social-proof">
+    <strong>2,847 people</strong> already on the waitlist
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">$10M</div>
+      <div class="stat-label">Beta Volume</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">64</div>
+      <div class="stat-label">Active Markets</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">412</div>
+      <div class="stat-label">Beta Testers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$0</div>
+      <div class="stat-label">Trading Fees</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MARKET PREVIEW ── -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">🔥 Live Markets</div>
+    <div class="section-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      Beta access only
+    </div>
+  </div>
+
+  <div class="market-grid">
+
+    <div class="market-card" onclick="openModal()">
+      <div class="card-badge badge-hot">HOT</div>
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">Beta Access Required</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">₿</div>
+        <div class="card-info">
+          <div class="card-title">Bitcoin above $120K before July 2025?</div>
+          <div class="card-cat">🪙 Crypto · Ends Jun 30</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes">Yes</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:72%"></div></div>
+          <span class="opt-pct opt-pct-yes">72¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no">No</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:28%"></div></div>
+          <span class="opt-pct opt-pct-no">28¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$4.2M</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
+          <button class="btn-no"  onclick="openModal()">Buy No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-card" onclick="openModal()">
+      <div class="card-badge badge-live">LIVE</div>
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">Beta Access Required</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">🏈</div>
+        <div class="card-info">
+          <div class="card-title">Super Bowl LX — Chiefs win?</div>
+          <div class="card-cat">⚽ Sports · Feb 2026</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes">Yes</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:71%"></div></div>
+          <span class="opt-pct opt-pct-yes">71¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no">No</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:29%"></div></div>
+          <span class="opt-pct opt-pct-no">29¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$6.1M</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
+          <button class="btn-no"  onclick="openModal()">Buy No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-card" onclick="openModal()">
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">Beta Access Required</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">🤖</div>
+        <div class="card-info">
+          <div class="card-title">GPT-5 released before end of 2025?</div>
+          <div class="card-cat">💻 Tech · Ends Dec 31</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes">Yes</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:84%"></div></div>
+          <span class="opt-pct opt-pct-yes">84¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no">No</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:16%"></div></div>
+          <span class="opt-pct opt-pct-no">16¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$1.9M</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
+          <button class="btn-no"  onclick="openModal()">Buy No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-card" onclick="openModal()">
+      <div class="card-badge badge-hot">HOT</div>
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">Beta Access Required</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">🗳️</div>
+        <div class="card-info">
+          <div class="card-title">Democrat wins 2028 US Presidential election?</div>
+          <div class="card-cat">🏛 Politics · Nov 2028</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes">Yes</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:45%"></div></div>
+          <span class="opt-pct opt-pct-yes">45¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no">No</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:55%"></div></div>
+          <span class="opt-pct opt-pct-no">55¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$8.7M</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
+          <button class="btn-no"  onclick="openModal()">Buy No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-card" onclick="openModal()">
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">Beta Access Required</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">🌊</div>
+        <div class="card-info">
+          <div class="card-title">Solana price above $500 by Q4 2025?</div>
+          <div class="card-cat">🪙 Crypto · Ends Dec 31</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes">Yes</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:47%"></div></div>
+          <span class="opt-pct opt-pct-yes">47¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no">No</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:53%"></div></div>
+          <span class="opt-pct opt-pct-no">53¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$340K</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
+          <button class="btn-no"  onclick="openModal()">Buy No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-card" onclick="openModal()">
+      <div class="card-badge badge-live">LIVE</div>
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">Beta Access Required</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">⚽</div>
+        <div class="card-info">
+          <div class="card-title">Brazil wins 2026 FIFA World Cup?</div>
+          <div class="card-cat">⚽ Sports · Jul 2026</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes">Yes</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:32%"></div></div>
+          <span class="opt-pct opt-pct-yes">32¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no">No</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:68%"></div></div>
+          <span class="opt-pct opt-pct-no">68¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$5.3M</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
+          <button class="btn-no"  onclick="openModal()">Buy No</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ── -->
+<div class="section">
+  <div class="section-header" style="justify-content:center;margin-bottom:32px;">
+    <div class="section-title" style="text-align:center;">How GoMarket works</div>
+  </div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-number">1</div>
+      <div class="how-title">Pick a market</div>
+      <div class="how-desc">Browse hundreds of markets on crypto, politics, sports, and global events. Every outcome is binary — Yes or No.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-number">2</div>
+      <div class="how-title">Buy a position</div>
+      <div class="how-desc">Trade shares at prices between 1¢ and 99¢. The price reflects the crowd's probability. Connect any wallet and trade with USDC.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-number">3</div>
+      <div class="how-title">Collect your winnings</div>
+      <div class="how-desc">When the event resolves, winning shares pay out $1 each. All settlement happens on-chain — trustless and transparent.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WAITLIST CTA ── -->
+<div class="cta-section">
+  <div class="cta-card">
+    <h2>Be first when we open the gates</h2>
+    <p>Join the waitlist and get priority access as we onboard the next wave of beta testers.</p>
+    <form class="cta-form" onsubmit="handleWaitlist(event, this)">
+      <input type="email" placeholder="your@email.com" required />
+      <button type="submit" class="btn btn-primary">Notify Me</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 411 411" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M205.5 0C294.536 0 370.346 56.6233 398.887 135.824H356.974C330.589 78.5582 272.688 38.8069 205.5 38.8069C113.438 38.8069 38.8069 113.438 38.8069 205.5C38.8069 297.562 113.438 372.193 205.5 372.193C297.562 372.193 372.193 297.562 372.193 205.5C372.193 198.329 371.74 191.265 370.862 184.333H409.922C410.635 191.291 411 198.353 411 205.5C411 318.995 318.995 411 205.5 411C92.0055 411 0 318.995 0 205.5C0 92.0055 92.0055 0 205.5 0Z" fill="url(#f0)"/>
+        <path d="M386.305 226.667H328.094V184.333H386.305V226.667Z" fill="url(#f1)"/>
+        <path d="M144.644 206.382V337.725C128.786 330.415 114.469 320.337 102.309 308.11V164.047L144.644 206.382Z" fill="white"/>
+        <path d="M308.691 308.11C296.532 320.337 282.214 330.415 266.356 337.725V206.382L308.691 164.047V308.11Z" fill="white"/>
+        <path d="M295.745 91.3308C300.288 94.9265 304.611 98.7866 308.691 102.889V135.824L205.5 239.015L102.309 135.824V102.889C106.389 98.7867 110.712 94.9263 115.254 91.3308L205.5 180.805L295.745 91.3308Z" fill="white"/>
+        <defs>
+          <linearGradient id="f0" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+            <stop offset="0.08" stop-color="#9945FF"/>
+            <stop offset="0.3"  stop-color="#8752F3"/>
+            <stop offset="0.5"  stop-color="#5497D5"/>
+            <stop offset="0.6"  stop-color="#43B4CA"/>
+            <stop offset="0.72" stop-color="#28E0B9"/>
+            <stop offset="0.97" stop-color="#19FB9B"/>
+          </linearGradient>
+          <linearGradient id="f1" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+            <stop offset="0.08" stop-color="#9945FF"/>
+            <stop offset="0.3"  stop-color="#8752F3"/>
+            <stop offset="0.5"  stop-color="#5497D5"/>
+            <stop offset="0.6"  stop-color="#43B4CA"/>
+            <stop offset="0.72" stop-color="#28E0B9"/>
+            <stop offset="0.97" stop-color="#19FB9B"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span style="font-size:16px;font-weight:800;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">GoMarket</span>
+    </div>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="#" onclick="openModal();return false;">Sign In</a>
+    </div>
+
+    <div class="footer-socials">
+      <a href="https://x.com/GoMarketApp" target="_blank" rel="noopener" class="social-btn" title="Follow on X">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://instagram.com/GoMarketApp" target="_blank" rel="noopener" class="social-btn" title="Follow on Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-copy">
+      © 2025 GoMarket · Closed Beta · All rights reserved · Built on Polygon · Settled in USDC
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════
+     MODAL
+══════════════════════════════════ -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="backdropClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- STATE 1: wallet selection -->
+    <div id="stateConnect">
+      <div class="modal-s1">
+        <div class="modal-logo">
+          <svg width="40" height="40" viewBox="0 0 411 411" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M205.5 0C294.536 0 370.346 56.6233 398.887 135.824H356.974C330.589 78.5582 272.688 38.8069 205.5 38.8069C113.438 38.8069 38.8069 113.438 38.8069 205.5C38.8069 297.562 113.438 372.193 205.5 372.193C297.562 372.193 372.193 297.562 372.193 205.5C372.193 198.329 371.74 191.265 370.862 184.333H409.922C410.635 191.291 411 198.353 411 205.5C411 318.995 318.995 411 205.5 411C92.0055 411 0 318.995 0 205.5C0 92.0055 92.0055 0 205.5 0Z" fill="url(#m0)"/>
+            <path d="M386.305 226.667H328.094V184.333H386.305V226.667Z" fill="url(#m1)"/>
+            <path d="M144.644 206.382V337.725C128.786 330.415 114.469 320.337 102.309 308.11V164.047L144.644 206.382Z" fill="white"/>
+            <path d="M308.691 308.11C296.532 320.337 282.214 330.415 266.356 337.725V206.382L308.691 164.047V308.11Z" fill="white"/>
+            <path d="M295.745 91.3308C300.288 94.9265 304.611 98.7866 308.691 102.889V135.824L205.5 239.015L102.309 135.824V102.889C106.389 98.7867 110.712 94.9263 115.254 91.3308L205.5 180.805L295.745 91.3308Z" fill="white"/>
+            <defs>
+              <linearGradient id="m0" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+                <stop offset="0.08" stop-color="#9945FF"/>
+                <stop offset="0.3"  stop-color="#8752F3"/>
+                <stop offset="0.5"  stop-color="#5497D5"/>
+                <stop offset="0.6"  stop-color="#43B4CA"/>
+                <stop offset="0.72" stop-color="#28E0B9"/>
+                <stop offset="0.97" stop-color="#19FB9B"/>
+              </linearGradient>
+              <linearGradient id="m1" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+                <stop offset="0.08" stop-color="#9945FF"/>
+                <stop offset="0.3"  stop-color="#8752F3"/>
+                <stop offset="0.5"  stop-color="#5497D5"/>
+                <stop offset="0.6"  stop-color="#43B4CA"/>
+                <stop offset="0.72" stop-color="#28E0B9"/>
+                <stop offset="0.97" stop-color="#19FB9B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h2>Sign in to GoMarket</h2>
+        <p class="modal-sub">Connect your wallet to access the closed beta</p>
+
+        <div class="wallet-list">
+          <button class="wallet-btn" onclick="connectWallet('MetaMask')">
+            <div class="wallet-icon" style="background:#fff3e0;">🦊</div>
+            <span>MetaMask</span>
+            <span class="wallet-arrow">›</span>
+          </button>
+          <button class="wallet-btn" onclick="connectWallet('Phantom')">
+            <div class="wallet-icon" style="background:#f0eeff;">👻</div>
+            <span>Phantom</span>
+            <span class="wallet-arrow">›</span>
+          </button>
+          <button class="wallet-btn" onclick="connectWallet('WalletConnect')">
+            <div class="wallet-icon" style="background:#e8f4ff;">🔗</div>
+            <span>WalletConnect</span>
+            <span class="wallet-arrow">›</span>
+          </button>
+          <button class="wallet-btn" onclick="connectWallet('Coinbase Wallet')">
+            <div class="wallet-icon" style="background:#e8f0ff;">🔵</div>
+            <span>Coinbase Wallet</span>
+            <span class="wallet-arrow">›</span>
+          </button>
+        </div>
+
+        <div class="modal-divider">or join the waitlist</div>
+
+        <div class="modal-email-row">
+          <input type="email" placeholder="your@email.com" id="modalEmail" />
+          <button class="btn btn-primary" onclick="handleModalWaitlist()">Request Access</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATE 2: connecting spinner -->
+    <div id="stateConnecting" style="display:none;">
+      <div class="modal-s2">
+        <div class="spinner-ring"></div>
+        <h3>Connecting wallet…</h3>
+        <p id="connectingWalletName">Waiting for MetaMask</p>
+      </div>
+    </div>
+
+    <!-- STATE 3: access denied -->
+    <div id="stateDenied" style="display:none;">
+      <div class="modal-s3">
+        <div class="denied-icon">🔒</div>
+        <h2>Access Denied</h2>
+        <div class="denied-tag">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Wallet not on beta list
+        </div>
+        <p class="denied-msg">
+          Your wallet isn't on the closed beta access list. GoMarket is currently available to a limited group of early testers only.
+        </p>
+        <p class="divider-text">Join the waitlist for priority access</p>
+        <div class="modal-email-row" style="margin-bottom:0;">
+          <input type="email" placeholder="your@email.com" id="deniedEmail" />
+          <button class="btn btn-primary" onclick="handleDeniedWaitlist()">Notify Me</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast">✓ You're on the waitlist! We'll be in touch.</div>
+
+<script>
+  const backdrop   = document.getElementById('modalBackdrop');
+  const s1         = document.getElementById('stateConnect');
+  const s2         = document.getElementById('stateConnecting');
+  const s3         = document.getElementById('stateDenied');
+
+  function openModal() {
+    showState(1);
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => showState(1), 300);
+  }
+
+  function backdropClick(e) {
+    if (e.target === backdrop) closeModal();
+  }
+
+  function showState(n) {
+    s1.style.display = n === 1 ? 'block' : 'none';
+    s2.style.display = n === 2 ? 'block' : 'none';
+    s3.style.display = n === 3 ? 'block' : 'none';
+  }
+
+  function connectWallet(name) {
+    document.getElementById('connectingWalletName').textContent = 'Waiting for ' + name + '…';
+    showState(2);
+    setTimeout(() => showState(3), 1800);
+  }
+
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3800);
+  }
+
+  function handleWaitlist(e, form) {
+    e.preventDefault();
+    form.reset();
+    showToast();
+  }
+
+  function handleModalWaitlist() {
+    const inp = document.getElementById('modalEmail');
+    if (!inp.value || !inp.value.includes('@')) {
+      inp.style.borderColor = '#e05555';
+      setTimeout(() => inp.style.borderColor = '', 1200);
+      return;
+    }
+    inp.value = '';
+    closeModal();
+    setTimeout(showToast, 350);
+  }
+
+  function handleDeniedWaitlist() {
+    const inp = document.getElementById('deniedEmail');
+    if (!inp.value || !inp.value.includes('@')) {
+      inp.style.borderColor = '#e05555';
+      setTimeout(() => inp.style.borderColor = '', 1200);
+      return;
+    }
+    inp.value = '';
+    closeModal();
+    setTimeout(showToast, 350);
+  }
+
+  // Animate bars on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.opt-bar').forEach(b => {
+      const w = b.style.width;
+      b.style.width = '0%';
+      setTimeout(() => { b.style.width = w; }, 300 + Math.random() * 200);
+    });
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

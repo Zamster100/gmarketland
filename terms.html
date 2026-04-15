@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — GoMarket</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #8954F2;
+      --mint:   #2EE1B1;
+      --navy:   #000092;
+      --sky:    #49A7C3;
+      --bg:     #06060e;
+      --bg2:    #0d0d1a;
+      --bg3:    #13132a;
+      --border: rgba(137,84,242,.18);
+      --text:   #ffffff;
+      --muted:  #7777a0;
+      --grad2:  linear-gradient(90deg, var(--purple), var(--mint));
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 28px;
+      height: 62px;
+      background: rgba(6,6,14,.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 9px;
+      text-decoration: none;
+    }
+    .nav-logo-name {
+      font-size: 18px; font-weight: 800;
+      background: var(--grad2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-back {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 9px;
+      transition: all .2s;
+    }
+    .nav-back:hover { color: var(--text); border-color: var(--purple); }
+
+    .page-wrap {
+      max-width: 780px;
+      margin: 56px auto 100px;
+      padding: 0 24px;
+    }
+
+    .page-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -.8px;
+      margin-bottom: 10px;
+    }
+
+    .effective {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 48px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+
+    .toc h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      counter-reset: toc;
+    }
+
+    .toc ol li { counter-increment: toc; }
+
+    .toc ol li a {
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+      opacity: .7;
+      transition: opacity .2s;
+    }
+
+    .toc ol li a::before {
+      content: counter(toc) ". ";
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    .toc ol li a:hover { opacity: 1; color: var(--mint); }
+
+    .section {
+      margin-bottom: 44px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      padding-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section h2 .sec-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--grad2);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 14px;
+    }
+
+    .section ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .section ul li {
+      font-size: 15px;
+      color: rgba(255,255,255,.75);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .section ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+    }
+
+    .callout {
+      background: rgba(137,84,242,.07);
+      border: 1px solid rgba(137,84,242,.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 14px;
+    }
+
+    .divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--mint); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 411 411" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M205.5 0C294.536 0 370.346 56.6233 398.887 135.824H356.974C330.589 78.5582 272.688 38.8069 205.5 38.8069C113.438 38.8069 38.8069 113.438 38.8069 205.5C38.8069 297.562 113.438 372.193 205.5 372.193C297.562 372.193 372.193 297.562 372.193 205.5C372.193 198.329 371.74 191.265 370.862 184.333H409.922C410.635 191.291 411 198.353 411 205.5C411 318.995 318.995 411 205.5 411C92.0055 411 0 318.995 0 205.5C0 92.0055 92.0055 0 205.5 0Z" fill="url(#t0)"/>
+      <path d="M386.305 226.667H328.094V184.333H386.305V226.667Z" fill="url(#t1)"/>
+      <path d="M144.644 206.382V337.725C128.786 330.415 114.469 320.337 102.309 308.11V164.047L144.644 206.382Z" fill="white"/>
+      <path d="M308.691 308.11C296.532 320.337 282.214 330.415 266.356 337.725V206.382L308.691 164.047V308.11Z" fill="white"/>
+      <path d="M295.745 91.3308C300.288 94.9265 304.611 98.7866 308.691 102.889V135.824L205.5 239.015L102.309 135.824V102.889C106.389 98.7867 110.712 94.9263 115.254 91.3308L205.5 180.805L295.745 91.3308Z" fill="white"/>
+      <defs>
+        <linearGradient id="t0" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+          <stop offset="0.08" stop-color="#9945FF"/><stop offset="0.3" stop-color="#8752F3"/>
+          <stop offset="0.5" stop-color="#5497D5"/><stop offset="0.6" stop-color="#43B4CA"/>
+          <stop offset="0.72" stop-color="#28E0B9"/><stop offset="0.97" stop-color="#19FB9B"/>
+        </linearGradient>
+        <linearGradient id="t1" x1="0" y1="205.5" x2="351.768" y2="61.1532" gradientUnits="userSpaceOnUse">
+          <stop offset="0.08" stop-color="#9945FF"/><stop offset="0.3" stop-color="#8752F3"/>
+          <stop offset="0.5" stop-color="#5497D5"/><stop offset="0.6" stop-color="#43B4CA"/>
+          <stop offset="0.72" stop-color="#28E0B9"/><stop offset="0.97" stop-color="#19FB9B"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="nav-logo-name">GoMarket</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-label">Legal</div>
+  <h1>Terms of Service</h1>
+  <div class="effective">Effective date: April 1, 2025 &nbsp;·&nbsp; Version 1.0 (Closed Beta)</div>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#s1">Acceptance of Terms</a></li>
+      <li><a href="#s2">Beta Program</a></li>
+      <li><a href="#s3">Eligibility</a></li>
+      <li><a href="#s4">Description of Service</a></li>
+      <li><a href="#s5">User Accounts & Wallets</a></li>
+      <li><a href="#s6">Prohibited Conduct</a></li>
+      <li><a href="#s7">Risks & Disclaimers</a></li>
+      <li><a href="#s8">Intellectual Property</a></li>
+      <li><a href="#s9">Limitation of Liability</a></li>
+      <li><a href="#s10">Governing Law</a></li>
+      <li><a href="#s11">Changes to Terms</a></li>
+      <li><a href="#s12">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="s1">
+    <h2><span class="sec-num">1</span> Acceptance of Terms</h2>
+    <p>By accessing or using the GoMarket platform (the "Service"), including during its closed beta phase, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not access or use the Service.</p>
+    <p>These Terms constitute a legally binding agreement between you and GoMarket ("we," "us," or "our"). Please read them carefully before using the platform.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s2">
+    <h2><span class="sec-num">2</span> Beta Program</h2>
+    <p>GoMarket is currently operating in a closed beta phase. Access is limited to invited testers only. By participating in the beta program, you acknowledge that:</p>
+    <ul>
+      <li>The Service is provided on an experimental basis and may contain bugs, errors, or incomplete features.</li>
+      <li>Features available during the beta may be modified, removed, or replaced before or after public launch.</li>
+      <li>Beta access may be revoked at any time without notice at our sole discretion.</li>
+      <li>Data, positions, or balances created during the beta period may be reset or not carried over to the live platform.</li>
+      <li>You agree to provide honest feedback to help us improve the Service.</li>
+    </ul>
+    <div class="callout">
+      Beta participation does not guarantee access to the production platform or any future product offerings from GoMarket.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s3">
+    <h2><span class="sec-num">3</span> Eligibility</h2>
+    <p>To use GoMarket, you must:</p>
+    <ul>
+      <li>Be at least 18 years of age (or the age of legal majority in your jurisdiction).</li>
+      <li>Not be located in a jurisdiction where prediction markets or digital asset trading is prohibited by law.</li>
+      <li>Have received a valid beta invitation from GoMarket or been approved through our waitlist process.</li>
+      <li>Not be subject to any sanctions or restrictions that would prohibit you from using the Service.</li>
+    </ul>
+    <p>By using the Service, you represent and warrant that you meet all eligibility requirements. We reserve the right to verify eligibility and to deny or revoke access for any reason.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s4">
+    <h2><span class="sec-num">4</span> Description of Service</h2>
+    <p>GoMarket is a decentralized prediction market platform that allows eligible users to buy and sell outcome shares on the resolution of real-world events, including but not limited to events in the categories of politics, sports, technology, finance, and global news.</p>
+    <p>All market transactions are settled on-chain using smart contracts. GoMarket does not hold user funds in custody. You retain sole control of your connected wallet at all times.</p>
+    <p>GoMarket does not guarantee the accuracy of market data, event resolutions, or any prices displayed on the platform. Markets are resolved based on publicly verifiable information from trusted data sources, the selection of which is at our discretion.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s5">
+    <h2><span class="sec-num">5</span> User Accounts & Wallets</h2>
+    <p>GoMarket is non-custodial. You connect using a compatible third-party cryptocurrency wallet. You are solely responsible for the security of your wallet, private keys, and seed phrases. We have no ability to recover lost wallets or reverse on-chain transactions.</p>
+    <ul>
+      <li>Do not share your private keys or seed phrase with anyone, including GoMarket staff.</li>
+      <li>You are responsible for all activity associated with your wallet address.</li>
+      <li>We reserve the right to block wallet addresses that violate these Terms.</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s6">
+    <h2><span class="sec-num">6</span> Prohibited Conduct</h2>
+    <p>You agree not to use the Service to:</p>
+    <ul>
+      <li>Manipulate, distort, or artificially influence market prices or outcomes.</li>
+      <li>Use automated bots, scrapers, or scripts without prior written authorization.</li>
+      <li>Engage in any activity that constitutes fraud, misrepresentation, or market manipulation.</li>
+      <li>Circumvent geographic or access restrictions through VPNs or other means.</li>
+      <li>Violate any applicable laws or regulations, including financial regulations in your jurisdiction.</li>
+      <li>Attempt to gain unauthorized access to any part of the platform or its infrastructure.</li>
+      <li>Reproduce, copy, or distribute any part of the Service without our permission.</li>
+    </ul>
+    <p>Violation of these prohibitions may result in immediate termination of your access and, where appropriate, referral to relevant authorities.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s7">
+    <h2><span class="sec-num">7</span> Risks & Disclaimers</h2>
+    <div class="callout">
+      Trading on prediction markets involves significant financial risk. You may lose some or all of the funds you commit to any position. Never trade more than you can afford to lose.
+    </div>
+    <p>By using GoMarket, you acknowledge and accept the following risks:</p>
+    <ul>
+      <li><strong>Market risk:</strong> Prices fluctuate and winning outcomes are not guaranteed.</li>
+      <li><strong>Smart contract risk:</strong> Despite audits, smart contracts may contain bugs or vulnerabilities.</li>
+      <li><strong>Regulatory risk:</strong> Laws governing prediction markets and digital assets vary by jurisdiction and may change.</li>
+      <li><strong>Liquidity risk:</strong> Some markets may have limited liquidity, making it difficult to exit positions.</li>
+      <li><strong>Resolution risk:</strong> Disputed or ambiguous events may be resolved in ways you did not anticipate.</li>
+    </ul>
+    <p>The Service is provided "as is" and "as available" without warranties of any kind, express or implied. We do not warrant that the Service will be uninterrupted, error-free, or free of harmful components.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s8">
+    <h2><span class="sec-num">8</span> Intellectual Property</h2>
+    <p>All content on GoMarket, including but not limited to the logo, design, interface, text, and software, is the property of GoMarket or its licensors and is protected by applicable intellectual property laws.</p>
+    <p>You are granted a limited, non-exclusive, non-transferable license to access and use the Service for personal, non-commercial purposes. You may not reproduce, modify, distribute, or create derivative works from any part of the Service without our prior written consent.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s9">
+    <h2><span class="sec-num">9</span> Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, GoMarket and its officers, employees, agents, and affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, loss of data, or financial losses arising from:</p>
+    <ul>
+      <li>Your use of or inability to use the Service.</li>
+      <li>Any unauthorized access to or alteration of your data.</li>
+      <li>Market losses or failed transactions.</li>
+      <li>Any bugs, errors, or interruptions in the Service.</li>
+    </ul>
+    <p>Our total aggregate liability to you for any claims arising out of or relating to these Terms or the Service shall not exceed the amount you have paid to GoMarket (if any) in the twelve months preceding the claim.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s10">
+    <h2><span class="sec-num">10</span> Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law provisions.</p>
+    <p>Any dispute arising out of or in connection with these Terms shall first be attempted to be resolved through good-faith negotiation. If unresolved, disputes shall be submitted to binding arbitration under the rules of the American Arbitration Association.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s11">
+    <h2><span class="sec-num">11</span> Changes to Terms</h2>
+    <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the effective date at the top of this page and, where possible, notify beta testers via email.</p>
+    <p>Your continued use of the Service after any changes constitutes your acceptance of the revised Terms.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s12">
+    <h2><span class="sec-num">12</span> Contact</h2>
+    <p>If you have any questions about these Terms, please contact us at:</p>
+    <ul>
+      <li>Email: legal@gomarket.io</li>
+      <li>Platform: via the feedback form in the beta dashboard (once available)</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html">GoMarket</a> &nbsp;·&nbsp;
+  <a href="terms.html">Terms of Service</a> &nbsp;·&nbsp;
+  <a href="privacy.html">Privacy Policy</a>
+  <br><br>
+  © 2025 GoMarket. All rights reserved. Closed Beta — Version 1.0
+</footer>
+
+</body>
+</html>
