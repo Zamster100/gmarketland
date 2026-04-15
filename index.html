@@ -1537,6 +1537,11 @@
 <!-- ── TOAST ── -->
 <div class="toast" id="toast">✓ You're on the waitlist! We'll be in touch.</div>
 
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
+</script>
+
 <script>
   const backdrop   = document.getElementById('modalBackdrop');
   const s1         = document.getElementById('stateConnect');
@@ -1619,9 +1624,6 @@
   // Close on ESC
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // ── AOS INIT ──
-  AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
-
   // ── THEME TOGGLE ──
   function toggleTheme() {
     document.body.classList.toggle('light');
@@ -1634,7 +1636,5 @@
     if (saved === 'light') document.body.classList.add('light');
   })();
 </script>
-
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </body>
 </html>
