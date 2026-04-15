@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <title>GoMarket — Prediction Markets · Closed Beta</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1098,7 +1099,7 @@
 </section>
 
 <!-- ── STATS BAR ── -->
-<div class="stats-bar">
+<div class="stats-bar" data-aos="fade-up" data-aos-duration="600">
   <div class="stats-inner">
     <div class="stat-item">
       <div class="stat-value">$10M</div>
@@ -1121,7 +1122,7 @@
 
 <!-- ── MARKET PREVIEW ── -->
 <div class="section">
-  <div class="section-header">
+  <div class="section-header" data-aos="fade-up" data-aos-duration="500">
     <div class="section-title">🔥 Live Markets</div>
     <div class="section-badge">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1133,7 +1134,7 @@
 
   <div class="market-grid">
 
-    <div class="market-card" onclick="openModal()">
+    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="0" data-aos-duration="500">
       <div class="card-badge badge-hot">HOT</div>
       <div class="card-lock-overlay">
         <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
@@ -1167,7 +1168,7 @@
       </div>
     </div>
 
-    <div class="market-card" onclick="openModal()">
+    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="80" data-aos-duration="500">
       <div class="card-badge badge-live">LIVE</div>
       <div class="card-lock-overlay">
         <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
@@ -1201,7 +1202,7 @@
       </div>
     </div>
 
-    <div class="market-card" onclick="openModal()">
+    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="160" data-aos-duration="500">
       <div class="card-lock-overlay">
         <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <div class="lock-label">Beta Access Required</div>
@@ -1234,7 +1235,7 @@
       </div>
     </div>
 
-    <div class="market-card" onclick="openModal()">
+    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="0" data-aos-duration="500">
       <div class="card-badge badge-hot">HOT</div>
       <div class="card-lock-overlay">
         <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
@@ -1268,7 +1269,7 @@
       </div>
     </div>
 
-    <div class="market-card" onclick="openModal()">
+    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="80" data-aos-duration="500">
       <div class="card-lock-overlay">
         <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <div class="lock-label">Beta Access Required</div>
@@ -1301,7 +1302,7 @@
       </div>
     </div>
 
-    <div class="market-card" onclick="openModal()">
+    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="160" data-aos-duration="500">
       <div class="card-badge badge-live">LIVE</div>
       <div class="card-lock-overlay">
         <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
@@ -1340,21 +1341,21 @@
 
 <!-- ── HOW IT WORKS ── -->
 <div class="section">
-  <div class="section-header" style="justify-content:center;margin-bottom:32px;">
+  <div class="section-header" style="justify-content:center;margin-bottom:32px;" data-aos="fade-up" data-aos-duration="500">
     <div class="section-title" style="text-align:center;">How GoMarket works</div>
   </div>
   <div class="how-grid">
-    <div class="how-card">
+    <div class="how-card" data-aos="fade-up" data-aos-delay="0" data-aos-duration="500">
       <div class="how-number">1</div>
       <div class="how-title">Pick a market</div>
       <div class="how-desc">Browse hundreds of markets on crypto, politics, sports, and global events. Every outcome is binary — Yes or No.</div>
     </div>
-    <div class="how-card">
+    <div class="how-card" data-aos="fade-up" data-aos-delay="120" data-aos-duration="500">
       <div class="how-number">2</div>
       <div class="how-title">Buy a position</div>
       <div class="how-desc">Trade shares at prices between 1¢ and 99¢. The price reflects the crowd's probability. Connect any wallet and trade with USDC.</div>
     </div>
-    <div class="how-card">
+    <div class="how-card" data-aos="fade-up" data-aos-delay="240" data-aos-duration="500">
       <div class="how-number">3</div>
       <div class="how-title">Collect your winnings</div>
       <div class="how-desc">When the event resolves, winning shares pay out $1 each. All settlement happens on-chain — trustless and transparent.</div>
@@ -1363,7 +1364,7 @@
 </div>
 
 <!-- ── WAITLIST CTA ── -->
-<div class="cta-section">
+<div class="cta-section" data-aos="fade-up" data-aos-duration="600">
   <div class="cta-card">
     <h2>Be first when we open the gates</h2>
     <p>Join the waitlist and get priority access as we onboard the next wave of beta testers.</p>
@@ -1618,6 +1619,9 @@
   // Close on ESC
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  // ── AOS INIT ──
+  AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
+
   // ── THEME TOGGLE ──
   function toggleTheme() {
     document.body.classList.toggle('light');
@@ -1631,5 +1635,6 @@
   })();
 </script>
 
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </body>
 </html>
