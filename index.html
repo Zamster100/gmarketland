@@ -258,6 +258,38 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero h1 .grad-text::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,255,255,.55) 50%,
+        transparent 70%
+      );
+      background-size: 200% 100%;
+      background-position: -100% 0;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      transition: opacity .15s;
+      pointer-events: none;
+    }
+
+    .hero h1:hover .grad-text::after {
+      opacity: 1;
+      animation: shimmer .9s ease forwards;
+    }
+
+    @keyframes shimmer {
+      from { background-position: -100% 0; }
+      to   { background-position:  200% 0; }
     }
 
     .hero p {
@@ -1085,7 +1117,7 @@
     <span class="beta-dot"></span>
     Closed Beta · Limited Access
   </div>
-  <h1>Predict the future,<br><span class="grad-text">earn the edge.</span></h1>
+  <h1>Predict the future,<br><span class="grad-text" data-text="earn the edge.">earn the edge.</span></h1>
   <p>GoMarket is a decentralized prediction market where you trade on real-world outcomes — politics, crypto, sports, and beyond. Zero fees. On-chain settlement.</p>
 
   <form class="hero-form" onsubmit="handleWaitlist(event, this)">
