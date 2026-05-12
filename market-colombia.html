@@ -432,11 +432,13 @@
             Ends <strong>Jun 21, 2026</strong>
           </div>
           <span class="meta-dot"></span>
-          <div class="market-meta-item"><strong>$12,525,589</strong>&nbsp;Vol</div>
+          <div class="market-meta-item"><strong id="metaVolume">$28.4M</strong>&nbsp;Vol</div>
           <span class="meta-dot"></span>
           <div class="market-meta-item">
             <span class="live-dot"></span>&nbsp;Live
           </div>
+          <span class="meta-dot"></span>
+          <div class="market-meta-item" id="lastUpdated" style="font-size:11px;opacity:.65;"></div>
         </div>
       </div>
     </div>
@@ -446,15 +448,15 @@
       <div class="chart-legend">
         <div class="legend-item">
           <div class="legend-dot" style="background:#8954F2;"></div>
-          Abelardo de la Espriella <span class="legend-pct">&nbsp;41%</span>
+          <span id="legendName0">Abelardo de la Espriella</span><span class="legend-pct" id="legendPct0">&nbsp;43%</span>
         </div>
         <div class="legend-item">
           <div class="legend-dot" style="background:#2EE1B1;"></div>
-          Iván Cepeda Castro <span class="legend-pct">&nbsp;38%</span>
+          <span id="legendName1">Iván Cepeda Castro</span><span class="legend-pct" id="legendPct1">&nbsp;40%</span>
         </div>
         <div class="legend-item">
           <div class="legend-dot" style="background:#49A7C3;"></div>
-          Paloma Valencia <span class="legend-pct">&nbsp;18%</span>
+          <span id="legendName2">Paloma Valencia</span><span class="legend-pct" id="legendPct2">&nbsp;16%</span>
         </div>
       </div>
 
@@ -528,315 +530,7 @@
         <span style="text-align:center" class="cand-buy-no-hide">Buy No</span>
       </div>
 
-      <!-- Row 1 -->
-      <div class="cand-row">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(137,84,242,.18);color:#a97ef5;">AE</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Abelardo de la Espriella</div>
-            <div class="cand-vol-sub cand-vol-hide">$4,263,884 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:82%;background:var(--grad2);"></div></div>
-          <span class="cand-pct-num">41%</span>
-        </div>
-        <span class="cand-change change-pos cand-change-hide">+1%</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 42¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 60¢</button></div>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="cand-row">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(46,225,177,.14);color:#2EE1B1;">IC</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Iván Cepeda Castro</div>
-            <div class="cand-vol-sub cand-vol-hide">$3,714,592 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:76%;background:linear-gradient(90deg,#2EE1B1,#49A7C3);"></div></div>
-          <span class="cand-pct-num">38%</span>
-        </div>
-        <span class="cand-change change-pos cand-change-hide">+1%</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 39¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 63¢</button></div>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="cand-row">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(73,167,195,.16);color:#49A7C3;">PV</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Paloma Valencia</div>
-            <div class="cand-vol-sub cand-vol-hide">$3,482,117 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:36%;background:linear-gradient(90deg,#49A7C3,#2EE1B1);"></div></div>
-          <span class="cand-pct-num">18%</span>
-        </div>
-        <span class="cand-change change-pos cand-change-hide" style="color:#2EE1B1;background:rgba(46,225,177,.1);">+9%</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 18¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 84¢</button></div>
-      </div>
-
-      <!-- Extra rows (hidden by default) -->
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">VD</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Vicky Dávila <span style="color:var(--muted);font-weight:400;font-size:11px;">(IND)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$183,429 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">LM</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Luis Gilberto Murillo <span style="color:var(--muted);font-weight:400;font-size:11px;">(LCIB)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$137,841 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">CL</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Claudio López <span style="color:var(--muted);font-weight:400;font-size:11px;">(IND)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$118,374 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">SF</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Sergio Fajardo <span style="color:var(--muted);font-weight:400;font-size:11px;">(DC)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$97,663 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">GV</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Germán Vargas Lleras <span style="color:var(--muted);font-weight:400;font-size:11px;">(RC)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$82,917 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">RB</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Roy Barreras</div>
-            <div class="cand-vol-sub cand-vol-hide">$71,284 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">CC</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Carlos Felipe Córdoba</div>
-            <div class="cand-vol-sub cand-vol-hide">$58,392 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">DL</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">David Luna Sánchez <span style="color:var(--muted);font-weight:400;font-size:11px;">(IND)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$52,847 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.3¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">JO</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Juan Daniel Oviedo <span style="color:var(--muted);font-weight:400;font-size:11px;">(IND)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$43,619 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">GB</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Gustavo Bolívar <span style="color:var(--muted);font-weight:400;font-size:11px;">(HC)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$36,284 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">JG</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Juan Manuel Galán <span style="color:var(--muted);font-weight:400;font-size:11px;">(NL)</span></div>
-            <div class="cand-vol-sub cand-vol-hide">$29,873 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">MC</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Mauricio Cárdenas</div>
-            <div class="cand-vol-sub cand-vol-hide">$24,917 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">DQ</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Daniel Quintero</div>
-            <div class="cand-vol-sub cand-vol-hide">$19,384 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">EP</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Enrique Peñalosa</div>
-            <div class="cand-vol-sub cand-vol-hide">$15,739 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
-
-      <div class="cand-row extra">
-        <div class="cand-info">
-          <div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">JP</div>
-          <div class="cand-name-wrap">
-            <div class="cand-name">Juan Carlos Pinzón</div>
-            <div class="cand-vol-sub cand-vol-hide">$72,483 vol</div>
-          </div>
-        </div>
-        <div class="cand-pct-cell">
-          <div class="cand-bar-wrap"><div class="cand-bar" style="width:1%;background:var(--muted);"></div></div>
-          <span class="cand-pct-num" style="color:var(--muted);font-size:12px;">&lt;1%</span>
-        </div>
-        <span class="cand-change change-flat cand-change-hide">—</span>
-        <div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes 0.2¢</button></div>
-        <div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>
-      </div>
+      <div id="candTableRows"></div>
 
       <div class="view-more-row">
         <button class="view-more-btn" id="viewMoreBtn" onclick="toggleMoreCandidates()">
@@ -849,7 +543,7 @@
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-card-label">Total Volume</div>
-        <div class="stat-card-value">$12.5M</div>
+        <div class="stat-card-value" id="statVolValue">$28.4M</div>
         <div class="stat-card-sub">All-time traded</div>
       </div>
       <div class="stat-card">
@@ -859,7 +553,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-card-label">Candidates</div>
-        <div class="stat-card-value">18</div>
+        <div class="stat-card-value" id="statCandCount">18</div>
         <div class="stat-card-sub">Active options</div>
       </div>
     </div>
@@ -960,7 +654,7 @@
       <!-- Panel content (visible behind overlay) -->
       <div class="op-cand-row">
         <div class="op-cand-label">Selected candidate</div>
-        <div class="op-cand-name">Abelardo de la Espriella</div>
+        <div class="op-cand-name" id="opCandName">Abelardo de la Espriella</div>
       </div>
 
       <div class="op-tabs">
@@ -972,11 +666,11 @@
         <div class="op-yn-row">
           <div class="op-yn-btn yes">
             <div class="yn-label">Yes</div>
-            <div class="yn-price">42¢</div>
+            <div class="yn-price" id="opYesPrice">43¢</div>
           </div>
           <div class="op-yn-btn no-btn">
             <div class="yn-label">No</div>
-            <div class="yn-price">60¢</div>
+            <div class="yn-price" id="opNoPrice">57¢</div>
           </div>
         </div>
 
@@ -1320,15 +1014,154 @@
 
   /* ── View more candidates ── */
   function toggleMoreCandidates() {
-    const btn = document.getElementById('viewMoreBtn');
-    const rows = document.querySelectorAll('.cand-row.extra');
-    const expanded = btn.classList.contains('expanded');
-    rows.forEach(r => r.classList.toggle('visible', !expanded));
+    var btn = document.getElementById('viewMoreBtn');
+    var rows = document.querySelectorAll('.cand-row.extra');
+    var expanded = btn.classList.contains('expanded');
+    rows.forEach(function(r){ r.classList.toggle('visible', !expanded); });
     btn.classList.toggle('expanded');
+    var extraCount = rows.length;
     btn.innerHTML = expanded
-      ? 'View 15 more <span class="view-more-chevron">↓</span>'
+      ? 'View ' + extraCount + ' more <span class="view-more-chevron">↓</span>'
       : 'Show less <span class="view-more-chevron" style="transform:rotate(180deg);">↓</span>';
   }
+
+  /* ── Polymarket live data ── */
+  var TOP_COLORS = [
+    {color:'#a97ef5', bg:'rgba(137,84,242,.18)', bar:'var(--grad2)'},
+    {color:'#2EE1B1', bg:'rgba(46,225,177,.14)',  bar:'linear-gradient(90deg,#2EE1B1,#49A7C3)'},
+    {color:'#49A7C3', bg:'rgba(73,167,195,.16)',  bar:'linear-gradient(90deg,#49A7C3,#2EE1B1)'},
+  ];
+
+  function getInitials(name) {
+    var parts = name.split(' ').filter(function(p){ return p.length > 0; });
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+    return parts[0] ? parts[0].slice(0,2).toUpperCase() : '??';
+  }
+
+  function fmtVol(v) {
+    if (v >= 1e6) return '$' + (v/1e6).toFixed(1) + 'M';
+    if (v >= 1e3) return '$' + Math.round(v/1e3) + 'K';
+    return '$' + Math.round(v);
+  }
+
+  function fmtVolFull(v) {
+    return '$' + Math.round(v).toLocaleString();
+  }
+
+  function renderCandidateRows(candidates) {
+    var html = '';
+    candidates.forEach(function(c, i) {
+      var isExtra = i >= 3;
+      var prob_pct = Math.round(c.prob * 100);
+      var yes_c = Math.max(1, prob_pct);
+      var no_c  = Math.max(1, 100 - yes_c);
+      var bar_w = Math.min(100, Math.round(c.prob * 200));
+      var clsExtra = isExtra ? ' extra' : '';
+
+      if (!isExtra) {
+        var col = TOP_COLORS[i];
+        html += '<div class="cand-row' + clsExtra + '">'
+          + '<div class="cand-info">'
+          + '<div class="cand-avatar" style="background:' + col.bg + ';color:' + col.color + ';">' + getInitials(c.name) + '</div>'
+          + '<div class="cand-name-wrap">'
+          + '<div class="cand-name">' + c.name + '</div>'
+          + '<div class="cand-vol-sub cand-vol-hide">' + fmtVolFull(c.volume) + ' vol</div>'
+          + '</div></div>'
+          + '<div class="cand-pct-cell">'
+          + '<div class="cand-bar-wrap"><div class="cand-bar" style="width:' + bar_w + '%;background:' + col.bar + ';"></div></div>'
+          + '<span class="cand-pct-num">' + prob_pct + '%</span>'
+          + '</div>'
+          + '<span class="cand-change change-flat cand-change-hide">—</span>'
+          + '<div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes ' + yes_c + '¢</button></div>'
+          + '<div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No ' + no_c + '¢</button></div>'
+          + '</div>';
+      } else {
+        var dispProb  = c.prob < 0.01 ? '&lt;1%' : prob_pct + '%';
+        var numStyle  = c.prob < 0.01 ? 'color:var(--muted);font-size:12px;' : '';
+        var yesPrice  = c.prob < 0.01 ? (c.prob * 100).toFixed(2).replace(/\.?0+$/, '') + '¢' : yes_c + '¢';
+        html += '<div class="cand-row' + clsExtra + '">'
+          + '<div class="cand-info">'
+          + '<div class="cand-avatar" style="background:rgba(119,119,160,.12);color:var(--muted);">' + getInitials(c.name) + '</div>'
+          + '<div class="cand-name-wrap">'
+          + '<div class="cand-name">' + c.name + '</div>'
+          + '<div class="cand-vol-sub cand-vol-hide">' + fmtVolFull(c.volume) + ' vol</div>'
+          + '</div></div>'
+          + '<div class="cand-pct-cell">'
+          + '<div class="cand-bar-wrap"><div class="cand-bar" style="width:' + Math.max(1,bar_w) + '%;background:var(--muted);"></div></div>'
+          + '<span class="cand-pct-num" style="' + numStyle + '">' + dispProb + '</span>'
+          + '</div>'
+          + '<span class="cand-change change-flat cand-change-hide">—</span>'
+          + '<div style="text-align:center"><button class="cand-buy-yes" onclick="openModal()">Buy Yes ' + yesPrice + '</button></div>'
+          + '<div style="text-align:center" class="cand-buy-no-hide"><button class="cand-buy-no" onclick="openModal()">Buy No 99¢</button></div>'
+          + '</div>';
+      }
+    });
+    return html;
+  }
+
+  function loadMarketData() {
+    fetch('./data/colombia-market.json')
+      .then(function(r){ return r.json(); })
+      .then(function(d) {
+        var cands = d.candidates || [];
+        var ev    = d.event    || {};
+
+        /* candidates table */
+        var tableEl = document.getElementById('candTableRows');
+        if (tableEl) tableEl.innerHTML = renderCandidateRows(cands);
+
+        /* view-more button count */
+        var extraCount = Math.max(0, cands.length - 3);
+        var vmBtn = document.getElementById('viewMoreBtn');
+        if (vmBtn) vmBtn.innerHTML = 'View ' + extraCount + ' more <span class="view-more-chevron">↓</span>';
+
+        /* header volume */
+        var metaVol = document.getElementById('metaVolume');
+        if (metaVol) metaVol.textContent = fmtVol(ev.volume || 0);
+
+        /* stat cards */
+        var statVol = document.getElementById('statVolValue');
+        if (statVol) statVol.textContent = fmtVol(ev.volume || 0);
+        var statCnt = document.getElementById('statCandCount');
+        if (statCnt) statCnt.textContent = cands.length;
+
+        /* last-updated badge */
+        var updEl = document.getElementById('lastUpdated');
+        if (updEl && d.updated) {
+          var dt = new Date(d.updated);
+          var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getUTCMonth()];
+          updEl.textContent = 'Updated ' + mo + ' ' + dt.getUTCDate();
+        }
+
+        /* chart legend */
+        if (cands[0]) { var e0=document.getElementById('legendName0'); var p0=document.getElementById('legendPct0'); if(e0)e0.textContent=cands[0].name; if(p0)p0.textContent=' '+Math.round(cands[0].prob*100)+'%'; }
+        if (cands[1]) { var e1=document.getElementById('legendName1'); var p1=document.getElementById('legendPct1'); if(e1)e1.textContent=cands[1].name; if(p1)p1.textContent=' '+Math.round(cands[1].prob*100)+'%'; }
+        if (cands[2]) { var e2=document.getElementById('legendName2'); var p2=document.getElementById('legendPct2'); if(e2)e2.textContent=cands[2].name; if(p2)p2.textContent=' '+Math.round(cands[2].prob*100)+'%'; }
+
+        /* patch chart "Now" endpoint with live values */
+        ['ALL','1M','1W','1D'].forEach(function(tf) {
+          if (!CHART[tf]) return;
+          if (cands[0]) CHART[tf].a[CHART[tf].a.length-1] = Math.round(cands[0].prob*100);
+          if (cands[1]) CHART[tf].i[CHART[tf].i.length-1] = Math.round(cands[1].prob*100);
+          if (cands[2]) CHART[tf].p[CHART[tf].p.length-1] = Math.round(cands[2].prob*100);
+        });
+        renderChart(currentPeriod);
+
+        /* order panel top candidate */
+        if (cands[0]) {
+          var opName = document.getElementById('opCandName');
+          var opYes  = document.getElementById('opYesPrice');
+          var opNo   = document.getElementById('opNoPrice');
+          var yp = Math.round(cands[0].prob*100);
+          if (opName) opName.textContent = cands[0].name;
+          if (opYes)  opYes.textContent  = yp + '¢';
+          if (opNo)   opNo.textContent   = (100-yp) + '¢';
+        }
+      })
+      .catch(function(e){ console.warn('Market data unavailable:', e); });
+  }
+
+  loadMarketData();
 </script>
 </body>
 </html>

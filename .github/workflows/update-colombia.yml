@@ -1,0 +1,25 @@
+name: Update Colombia Market Data
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 06:00 UTC daily
+  workflow_dispatch:        # allow manual trigger from GitHub Actions UI
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch Polymarket data
+        run: python scripts/fetch_colombia.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/colombia-market.json
+          git diff --staged --quiet && echo "No changes." || (git commit -m "chore: update Colombia market data [skip ci]" && git push)
