@@ -181,19 +181,6 @@
     .info-section p:last-child { margin-bottom:0; }
     .info-section p strong { color:var(--text); }
 
-    /* ── FAQ ── */
-    .faq-section { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:14px; }
-    .faq-section-title { padding:16px 20px; font-size:14px; font-weight:700; border-bottom:1px solid var(--border); }
-    .faq-item { border-bottom:1px solid rgba(137,84,242,.07); }
-    .faq-item:last-child { border-bottom:none; }
-    .faq-q { padding:14px 20px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px; transition:background .15s; user-select:none; }
-    .faq-q:hover { background:rgba(137,84,242,.04); }
-    .faq-chevron { width:15px; height:15px; flex-shrink:0; color:var(--muted); transition:transform .2s; stroke:currentColor; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
-    .faq-item.open .faq-chevron { transform:rotate(180deg); }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .25s ease, padding .25s; }
-    .faq-item.open .faq-a { max-height:240px; }
-    .faq-a-inner { padding:0 20px 14px; }
-    .faq-a-inner p { font-size:13px; color:var(--muted); line-height:1.65; }
 
     /* ── ORDER PANEL ── */
     .order-panel-wrap { position:sticky; top:80px; }
@@ -570,70 +557,6 @@
       <p>This market includes any potential second round. If the result of this election is not known by December 31, 2026, 11:59 PM ET, the market will resolve to "Other." Additionally, if Abelardo de la Espriella has secured an option in this market, a second round scenario (if Capedo wins) means the result includes run-off outcomes.</p>
     </div>
 
-    <!-- FAQ -->
-    <div class="faq-section">
-      <div class="faq-section-title">Frequently Asked Questions</div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          What is the "Colombia Presidential Election" prediction market?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>It's a market where traders buy shares representing the probability of each candidate winning the 2026 Colombian presidential election. Share prices reflect the crowd's collective probability estimate for each outcome — 42¢ means the market implies a 42% chance.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          How much trading activity has this market generated?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>The Colombia Presidential Election market has generated over <strong style="color:var(--text)">$12.5 million</strong> in total trading volume across all candidates, making it one of the largest political markets on GoMarket.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          What are the current odds for "Colombia Presidential Election"?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>As of today, the market gives Abelardo de la Espriella a 41% chance, Iván Cepeda Castro 38%, and Paloma Valencia 18%. All remaining candidates are priced below 1% each.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          How will "Colombia Presidential Election" be resolved?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>The market resolves to the candidate officially declared the winner of the election by Colombia's National Civil Registry. If a second round is held, the winner of the run-off determines resolution. If no result is known by December 31, 2026, the market resolves to "Other."</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          How do I trade on "Colombia Presidential Election"?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Connect your wallet to access the trading panel. Select a candidate, choose Yes or No, set your amount, and click Trade. GoMarket is currently in closed beta — connect your wallet or join the waitlist for access.</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div><!-- /market-left -->
 
@@ -1004,15 +927,7 @@
     });
   })();
 
-  /* ── FAQ accordion ── */
-  function toggleFaq(qEl) {
-    const item = qEl.closest('.faq-item');
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
-    if(!wasOpen) item.classList.add('open');
-  }
-
-  /* ── View more candidates ── */
+/* ── View more candidates ── */
   function toggleMoreCandidates() {
     var btn = document.getElementById('viewMoreBtn');
     var rows = document.querySelectorAll('.cand-row.extra');
