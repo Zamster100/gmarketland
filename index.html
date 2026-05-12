@@ -569,6 +569,19 @@
     .badge-hot  { background: rgba(137,84,242,.14); color: var(--purple); border: 1px solid rgba(137,84,242,.28); }
     .badge-live { background: rgba(46,225,177,.1);  color: var(--mint);   border: 1px solid rgba(46,225,177,.22); }
 
+    @keyframes card-glow-pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(137,84,242,0), 0 0 14px rgba(137,84,242,.22); border-color: rgba(137,84,242,.45); }
+      50%     { box-shadow: 0 0 0 5px rgba(137,84,242,.09), 0 0 32px rgba(137,84,242,.5); border-color: rgba(137,84,242,.8); }
+    }
+    .market-card-featured { animation: card-glow-pulse 2.6s ease-in-out infinite; }
+    .market-card-featured:hover { animation: none; border-color: rgba(137,84,242,.9); box-shadow: 0 0 32px rgba(137,84,242,.55); }
+
+    @keyframes live-dot-pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%     { opacity:.35; transform:scale(.65); }
+    }
+    .live-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--mint); margin-right:5px; vertical-align:middle; position:relative; top:-1px; animation:live-dot-pulse 1.3s ease-in-out infinite; }
+
     /* ── HOW IT WORKS ── */
     .how-grid {
       display: grid;
@@ -834,6 +847,9 @@
       text-align: center;
       padding: 48px 32px;
     }
+    .wallet-icon-lg { width:58px; height:58px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 20px; }
+    .denied-wallet-row { display:inline-flex; align-items:center; gap:9px; background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:8px 14px; margin-bottom:18px; font-size:13px; font-weight:600; }
+    .denied-wallet-check { color:var(--mint); font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; }
 
     .spinner-ring {
       width: 64px; height: 64px;
@@ -1129,7 +1145,7 @@
 <div class="stats-bar" data-aos="fade-up" data-aos-duration="600">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-value">$10M</div>
+      <div class="stat-value">$25M</div>
       <div class="stat-label">Beta Volume</div>
     </div>
     <div class="stat-item">
@@ -1160,6 +1176,39 @@
   </div>
 
   <div class="market-grid">
+
+    <div class="market-card market-card-featured" onclick="location.href='market-colombia.html'" data-aos="fade-up" data-aos-delay="0" data-aos-duration="500" style="cursor:pointer;">
+      <div class="card-badge badge-live"><span class="live-dot"></span>LIVE</div>
+      <div class="card-lock-overlay">
+        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="lock-label">View Market →</div>
+      </div>
+      <div class="market-card-header">
+        <div class="card-icon">🇨🇴</div>
+        <div class="card-info">
+          <div class="card-title">Colombia Presidential Election 2026</div>
+          <div class="card-cat">🏛 Politics · Jun 21, 2026</div>
+        </div>
+      </div>
+      <div class="card-options">
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-yes" style="width:auto;font-size:11px;color:var(--muted);">Abelardo</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:41%"></div></div>
+          <span class="opt-pct opt-pct-yes">41¢</span>
+        </div>
+        <div class="card-option">
+          <span class="opt-lbl opt-lbl-no" style="width:auto;font-size:11px;color:var(--muted);">Iván</span>
+          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:38%"></div></div>
+          <span class="opt-pct opt-pct-no">38¢</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-vol">Vol: <span>$12.5M</span></div>
+        <div class="card-btns">
+          <button class="btn-yes" onclick="event.stopPropagation();location.href='market-colombia.html'">View Market</button>
+        </div>
+      </div>
+    </div>
 
     <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="0" data-aos-duration="500">
       <div class="card-badge badge-hot">HOT</div>
@@ -1322,40 +1371,6 @@
       </div>
       <div class="card-footer">
         <div class="card-vol">Vol: <span>$340K</span></div>
-        <div class="card-btns">
-          <button class="btn-yes" onclick="openModal()">Buy Yes</button>
-          <button class="btn-no"  onclick="openModal()">Buy No</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="market-card" onclick="openModal()" data-aos="fade-up" data-aos-delay="160" data-aos-duration="500">
-      <div class="card-badge badge-live">LIVE</div>
-      <div class="card-lock-overlay">
-        <div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <div class="lock-label">Beta Access Required</div>
-      </div>
-      <div class="market-card-header">
-        <div class="card-icon">⚽</div>
-        <div class="card-info">
-          <div class="card-title">Brazil wins 2026 FIFA World Cup?</div>
-          <div class="card-cat">⚽ Sports · Jul 2026</div>
-        </div>
-      </div>
-      <div class="card-options">
-        <div class="card-option">
-          <span class="opt-lbl opt-lbl-yes">Yes</span>
-          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-yes" style="width:32%"></div></div>
-          <span class="opt-pct opt-pct-yes">32¢</span>
-        </div>
-        <div class="card-option">
-          <span class="opt-lbl opt-lbl-no">No</span>
-          <div class="opt-bar-wrap"><div class="opt-bar opt-bar-no" style="width:68%"></div></div>
-          <span class="opt-pct opt-pct-no">68¢</span>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="card-vol">Vol: <span>$5.3M</span></div>
         <div class="card-btns">
           <button class="btn-yes" onclick="openModal()">Buy Yes</button>
           <button class="btn-no"  onclick="openModal()">Buy No</button>
@@ -1529,9 +1544,10 @@
     <!-- STATE 2: connecting spinner -->
     <div id="stateConnecting" style="display:none;">
       <div class="modal-s2">
+        <div id="connectingWalletIcon" class="wallet-icon-lg" style="background:#fff3e0;">🦊</div>
         <div class="spinner-ring"></div>
-        <h3>Connecting wallet…</h3>
-        <p id="connectingWalletName">Waiting for MetaMask</p>
+        <h3 id="connectingTitle">Connecting wallet…</h3>
+        <p id="connectingWalletName">Opening MetaMask…</p>
       </div>
     </div>
 
@@ -1540,6 +1556,11 @@
       <div class="modal-s3">
         <div class="denied-icon">🔒</div>
         <h2>Access Denied</h2>
+        <div class="denied-wallet-row">
+          <span id="deniedWalletIcon" style="font-size:16px;">🦊</span>
+          <span id="deniedWalletName">MetaMask</span>
+          <span class="denied-wallet-check">✓ Connected</span>
+        </div>
         <div class="denied-tag">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
@@ -1547,7 +1568,7 @@
           Wallet not on beta list
         </div>
         <p class="denied-msg">
-          Your wallet isn't on the closed beta access list. GoMarket is currently available to a limited group of early testers only.
+          Your wallet connected successfully, but this address isn't on the closed beta access list. GoMarket is currently available to a limited group of early testers only.
         </p>
         <p class="divider-text">Join the waitlist for priority access</p>
         <div class="modal-email-row" style="margin-bottom:0;">
@@ -1596,10 +1617,33 @@
     s3.style.display = n === 3 ? 'block' : 'none';
   }
 
+  const WALLETS = {
+    'MetaMask':        { emoji: '🦊', bg: '#fff3e0' },
+    'Phantom':         { emoji: '👻', bg: '#f0eeff' },
+    'WalletConnect':   { emoji: '🔗', bg: '#e8f4ff' },
+    'Coinbase Wallet': { emoji: '🔵', bg: '#e8f0ff' },
+  };
+
   function connectWallet(name) {
-    document.getElementById('connectingWalletName').textContent = 'Waiting for ' + name + '…';
+    var w = WALLETS[name] || { emoji: '💼', bg: 'var(--bg3)' };
+
+    var iconEl = document.getElementById('connectingWalletIcon');
+    iconEl.textContent = w.emoji;
+    iconEl.style.background = w.bg;
+    document.getElementById('connectingTitle').textContent = 'Connecting wallet…';
+    document.getElementById('connectingWalletName').textContent = 'Opening ' + name + '…';
     showState(2);
-    setTimeout(() => showState(3), 1800);
+
+    setTimeout(function() {
+      document.getElementById('connectingTitle').textContent = 'Wallet connected';
+      document.getElementById('connectingWalletName').textContent = 'Verifying beta access…';
+    }, 1600);
+
+    setTimeout(function() {
+      document.getElementById('deniedWalletIcon').textContent = w.emoji;
+      document.getElementById('deniedWalletName').textContent = name;
+      showState(3);
+    }, 3000);
   }
 
   function showToast() {
@@ -1669,7 +1713,7 @@
       if (!entry.isIntersecting) return;
       statsObserver.disconnect();
       const items = [
-        { el: document.querySelectorAll('.stat-value')[0], target: 10,  prefix: '$', suffix: 'M' },
+        { el: document.querySelectorAll('.stat-value')[0], target: 25,  prefix: '$', suffix: 'M' },
         { el: document.querySelectorAll('.stat-value')[1], target: 64,  prefix: '',  suffix: ''  },
         { el: document.querySelectorAll('.stat-value')[2], target: 412, prefix: '',  suffix: ''  },
         { el: document.querySelectorAll('.stat-value')[3], target: 0,   prefix: '$', suffix: ''  },
