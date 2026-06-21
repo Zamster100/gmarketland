@@ -1,128 +1,128 @@
 {
-  "updated": "2026-06-20T08:57:55Z",
+  "updated": "2026-06-21T09:51:27Z",
   "event": {
     "title": "Colombia Presidential Election",
-    "volume": 38412039.65,
-    "liquidity": 5641119.48
+    "volume": 39438364.96,
+    "liquidity": 5954603.92
   },
   "candidates": [
     {
       "name": "Abelardo de la Espriella",
-      "prob": 0.885,
-      "volume": 4055910.47,
-      "liquidity": 215006.09,
+      "prob": 0.865,
+      "volume": 4512756.06,
+      "liquidity": 125371.76,
       "marketId": "569366"
     },
     {
       "name": "Iván Cepeda Castro",
-      "prob": 0.115,
-      "volume": 4194273.57,
-      "liquidity": 213400.24,
+      "prob": 0.145,
+      "volume": 4763612.88,
+      "liquidity": 191329.36,
       "marketId": "569368"
     },
     {
       "name": "Vicky Dávila (IND)",
       "prob": 0.0005,
-      "volume": 3023639.86,
-      "liquidity": 280949.13,
+      "volume": 3023644.86,
+      "liquidity": 321869.03,
       "marketId": "569356"
     },
     {
       "name": "Luis Gilberto Murillo (CRB)",
       "prob": 0.0005,
-      "volume": 1930553.8,
-      "liquidity": 355737.07,
+      "volume": 1930558.8,
+      "liquidity": 381903.03,
       "marketId": "569357"
     },
     {
       "name": "Claudia López (IND)",
       "prob": 0.0005,
-      "volume": 1207052.03,
-      "liquidity": 332290.75,
+      "volume": 1207057.03,
+      "liquidity": 359557.63,
       "marketId": "569358"
     },
     {
       "name": "David Luna Sánchez (IND)",
       "prob": 0.0005,
-      "volume": 1860916.86,
-      "liquidity": 408360.74,
+      "volume": 1860921.86,
+      "liquidity": 435598.55,
       "marketId": "569359"
     },
     {
       "name": "Juan Daniel Oviedo (IND)",
       "prob": 0.0005,
-      "volume": 1535901.49,
-      "liquidity": 436815.5,
+      "volume": 1535906.49,
+      "liquidity": 464513.99,
       "marketId": "569360"
     },
     {
       "name": "Gustavo Bolívar (HC)",
       "prob": 0.0005,
-      "volume": 5796848.8,
-      "liquidity": 364296.16,
+      "volume": 5796853.8,
+      "liquidity": 392144.27,
       "marketId": "569362"
     },
     {
       "name": "Sergio Fajardo (DC)",
       "prob": 0.0005,
-      "volume": 2394157.63,
-      "liquidity": 180366.58,
+      "volume": 2394202.76,
+      "liquidity": 203369.51,
       "marketId": "569363"
     },
     {
       "name": "Juan Manuel Galán (NL)",
       "prob": 0.0005,
-      "volume": 769357.93,
-      "liquidity": 389909.48,
+      "volume": 769362.93,
+      "liquidity": 418472.97,
       "marketId": "569364"
     },
     {
       "name": "Mauricio Cárdenas",
       "prob": 0.0005,
-      "volume": 2526656.77,
-      "liquidity": 400845.11,
+      "volume": 2526661.77,
+      "liquidity": 428517.95,
       "marketId": "569367"
     },
     {
       "name": "Daniel Quintero",
       "prob": 0.0005,
-      "volume": 706363.01,
-      "liquidity": 396041.09,
+      "volume": 706368.01,
+      "liquidity": 423758.63,
       "marketId": "569369"
     },
     {
       "name": "Roy Barreras",
       "prob": 0.0005,
-      "volume": 1230966.06,
-      "liquidity": 414858.81,
+      "volume": 1230971.06,
+      "liquidity": 439424.36,
       "marketId": "569370"
     },
     {
       "name": "Enrique Peñalosa",
       "prob": 0.0005,
-      "volume": 1313332.61,
-      "liquidity": 376566.77,
+      "volume": 1313337.61,
+      "liquidity": 403761.9,
       "marketId": "569371"
     },
     {
       "name": "Juan Carlos Pinzón",
       "prob": 0.0005,
-      "volume": 478114.78,
-      "liquidity": 364128.01,
+      "volume": 478119.78,
+      "liquidity": 391443.03,
       "marketId": "569372"
     },
     {
       "name": "Paloma Valencia",
       "prob": 0.0005,
-      "volume": 2866978.37,
-      "liquidity": 112956.69,
+      "volume": 2867008.64,
+      "liquidity": 155139.09,
       "marketId": "569373"
     },
     {
       "name": "Carlos Felipe Córdoba",
       "prob": 0.0005,
-      "volume": 709141.77,
-      "liquidity": 394165.59,
+      "volume": 709146.77,
+      "liquidity": 418086.71,
       "marketId": "569374"
     }
   ]
