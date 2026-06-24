@@ -1,128 +1,114 @@
 {
-  "updated": "2026-06-23T09:40:46Z",
+  "updated": "2026-06-24T09:31:40Z",
   "event": {
     "title": "Colombia Presidential Election",
-    "volume": 43560655.13,
-    "liquidity": 7048855.56
+    "volume": 44084328.08,
+    "liquidity": 5929494.88
   },
   "candidates": [
     {
       "name": "Abelardo de la Espriella",
-      "prob": 0.9935,
-      "volume": 6399294.86,
-      "liquidity": 383887.67,
+      "prob": 0.996,
+      "volume": 6669022.37,
+      "liquidity": 290467.4,
       "marketId": "569366"
     },
     {
       "name": "Iván Cepeda Castro",
-      "prob": 0.0065,
-      "volume": 6995345.4,
-      "liquidity": 502284.01,
+      "prob": 0.003,
+      "volume": 7248356.92,
+      "liquidity": 375155.67,
       "marketId": "569368"
     },
     {
       "name": "Vicky Dávila (IND)",
       "prob": 0.0005,
       "volume": 3024888.54,
-      "liquidity": 346234.22,
+      "liquidity": 347364.92,
       "marketId": "569356"
     },
     {
       "name": "Luis Gilberto Murillo (CRB)",
       "prob": 0.0005,
       "volume": 1930559.8,
-      "liquidity": 410652.98,
+      "liquidity": 411685.91,
       "marketId": "569357"
     },
     {
       "name": "Claudia López (IND)",
       "prob": 0.0005,
       "volume": 1207057.03,
-      "liquidity": 387968.89,
+      "liquidity": 386938.23,
       "marketId": "569358"
     },
     {
       "name": "David Luna Sánchez (IND)",
       "prob": 0.0005,
       "volume": 1860921.86,
-      "liquidity": 462043.0,
+      "liquidity": 464829.14,
       "marketId": "569359"
     },
     {
       "name": "Juan Daniel Oviedo (IND)",
       "prob": 0.0005,
       "volume": 1535907.49,
-      "liquidity": 491505.91,
+      "liquidity": 491303.17,
       "marketId": "569360"
     },
     {
       "name": "Gustavo Bolívar (HC)",
       "prob": 0.0005,
       "volume": 5796853.8,
-      "liquidity": 420169.87,
+      "liquidity": 420880.4,
       "marketId": "569362"
     },
     {
       "name": "Sergio Fajardo (DC)",
       "prob": 0.0005,
       "volume": 2394242.26,
-      "liquidity": 282666.68,
+      "liquidity": 284639.8,
       "marketId": "569363"
-    },
-    {
-      "name": "Juan Manuel Galán (NL)",
-      "prob": 0.0005,
-      "volume": 769362.93,
-      "liquidity": 447344.21,
-      "marketId": "569364"
     },
     {
       "name": "Mauricio Cárdenas",
       "prob": 0.0005,
       "volume": 2526661.77,
-      "liquidity": 454392.6,
+      "liquidity": 454375.71,
       "marketId": "569367"
-    },
-    {
-      "name": "Daniel Quintero",
-      "prob": 0.0005,
-      "volume": 706368.01,
-      "liquidity": 449043.7,
-      "marketId": "569369"
     },
     {
       "name": "Roy Barreras",
       "prob": 0.0005,
-      "volume": 1230972.06,
-      "liquidity": 468378.2,
+      "volume": 1231962.06,
+      "liquidity": 470423.91,
       "marketId": "569370"
     },
     {
       "name": "Enrique Peñalosa",
       "prob": 0.0005,
       "volume": 1313337.61,
-      "liquidity": 429912.98,
+      "liquidity": 429952.78,
       "marketId": "569371"
     },
     {
       "name": "Juan Carlos Pinzón",
       "prob": 0.0005,
       "volume": 478119.78,
-      "liquidity": 418620.13,
+      "liquidity": 421110.48,
       "marketId": "569372"
     },
     {
       "name": "Paloma Valencia",
       "prob": 0.0005,
       "volume": 2869741.33,
-      "liquidity": 216797.35,
+      "liquidity": 218670.43,
       "marketId": "569373"
     },
     {
       "name": "Carlos Felipe Córdoba",
       "prob": 0.0005,
       "volume": 709146.77,
-      "liquidity": 456587.4,
+      "liquidity": 459820.82,
       "marketId": "569374"
     }
   ]
